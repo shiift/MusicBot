@@ -155,6 +155,9 @@ class MusicPlayer(EventEmitter):
 
         raise ValueError('Cannot pause a MusicPlayer in state %s' % self.state)
 
+    def remove(self, index):
+        return self.playlist.remove(index)
+
     def kill(self):
         self.state = MusicPlayerState.DEAD
         self.playlist.clear()

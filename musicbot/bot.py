@@ -842,6 +842,21 @@ class MusicBot(discord.Client):
         except:
             raise exceptions.CommandError('Invalid URL provided:\n{}\n'.format(server_link), expire_in=30)
 
+    async def cmd_remove(self, player, leftover_args):
+        """
+        Usage:
+            {command_prefix}remove item_index
+
+        v1.2 Removes the item from the playlist.
+        """
+
+        item_index = int(leftover_args[0]) if leftover_args else 0
+        try:
+            player.remove(int(item_index) - 1)
+            return Response(':put_litter_in_its_place: item at index (%s)' % item_index, delete_after=20)
+        except Exception as e:
+            raise exceptions.CommandError("Could not remove item at index (%s)" % item_index, expire_in=30)
+
     async def cmd_play(self, player, channel, author, permissions, leftover_args, song_url):
         """
         Usage:

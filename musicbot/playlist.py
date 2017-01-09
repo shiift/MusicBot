@@ -31,6 +31,11 @@ class Playlist(EventEmitter):
     def clear(self):
         self.entries.clear()
 
+    def remove(self, index):
+        temp_list = list(self.entries)
+        del temp_list[index]
+        self.entries = deque(temp_list)
+
     async def add_entry(self, song_url, **meta):
         """
             Validates and adds a song_url to be played. This does not start the download of the song.
